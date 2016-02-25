@@ -18,6 +18,11 @@ public class IndexController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    /**
+     * 最初に呼び出される画面
+     * @param model
+     * @return
+     */
     @RequestMapping("/")
     public String index(Model model) {
         try {
@@ -26,6 +31,8 @@ public class IndexController {
         } catch (Exception e) {
             throw new SystemException();
         }
+
+        //Templatesから"index"を探す。
         return "index";
     }
 

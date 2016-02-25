@@ -1,9 +1,11 @@
 package tiscon1.form;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import tiscon1.model.Prefecture;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -13,15 +15,14 @@ import java.io.Serializable;
 @Data
 public class AccountForm implements Serializable {
     @Size(min = 1, max = 100)
-    @NotEmpty
+    @NotBlank
     private String name;
 
-
-    @NotEmpty
+    @NotBlank
     private String email;
 
     @Size(min = 6)
-    @NotEmpty
+    @NotBlank
     private String password;
 
     @Size(min = 1, max = 100)
