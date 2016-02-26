@@ -39,8 +39,8 @@ public class LayoutInterceptor extends HandlerInterceptorAdapter {
 //            }
 //        }
 
-        List<Genre> musicCountry = new ArrayList<>();
-        List<Genre> musicOther = new ArrayList<>();
+        List<Genre> movieCountry = new ArrayList<>();
+        List<Genre> movieOther = new ArrayList<>();
         movieGenres.stream().forEach(o -> {
             if(o.getName().equals("日本映画") ||
                     o.getName().equals("アフリカ") ||
@@ -50,34 +50,63 @@ public class LayoutInterceptor extends HandlerInterceptorAdapter {
                     o.getName().equals("インド地方音楽") ||
                     o.getName().equals("ロシア"))
             {
+                movieCountry.add(o);
+            }else{
+                movieOther.add(o);
+            }
+        });
+
+        //国別のカテゴリを設定
+        dividedMovieGenres.add(movieCountry);
+
+        //ジャンル別のカテゴリを設定
+        for (int i = 0 ; i <= movieOther.size() / 15 ; i++){
+            if(movieOther.size() > (i + 1) * 15){
+                dividedMovieGenres.add(movieOther.subList(i * 15, (i +1) * 15));
+            }else{
+                dividedMovieGenres.add(movieOther.subList(i * 15, movieOther.size()));
+            }
+        }
+
+        modelAndView.getModel().put("dividedMovieGenres", dividedMovieGenres);
+
+
+        //音楽メニューの設定
+        List<List<Genre>> dividedMusicGenres = new ArrayList<List<Genre>>();
+//        for (int i = 0; i <= musicGenres.size() / 15; i++) {
+//            if (musicGenres.size() > (i + 1) * 15) {
+//                dividedMusicGenres.add(musicGenres.subList(i * 15, (i + 1) * 15));
+//            } else {
+//                dividedMusicGenres.add(musicGenres.subList(i * 15, musicGenres.size()));
+//            }
+//        }
+
+        List<Genre> musicCountry = new ArrayList<>();
+        List<Genre> musicOther = new ArrayList<>();
+        musicGenres.stream().forEach(o -> {
+            if(o.getName().equals("中国語") ||
+                    o.getName().equals("インド音楽") ||
+                    o.getName().equals("韓国語") ||
+                    o.getName().equals("アラブ音楽") ||
+                    o.getName().equals("ブラジル"))
+            {
                 musicCountry.add(o);
             }else{
                 musicOther.add(o);
             }
         });
 
-        //国別のカテゴリを設定
-        dividedMovieGenres.add(musicCountry);
+        dividedMusicGenres.add(musicCountry);
 
         //ジャンル別のカテゴリを設定
         for (int i = 0 ; i <= musicOther.size() / 15 ; i++){
             if(musicOther.size() > (i + 1) * 15){
-                dividedMovieGenres.add(musicOther.subList(i * 15, (i +1) * 15));
+                dividedMusicGenres.add(musicOther.subList(i * 15, (i +1) * 15));
             }else{
-                dividedMovieGenres.add(musicOther.subList(i * 15, musicOther.size()));
+                dividedMusicGenres.add(musicOther.subList(i * 15, musicOther.size()));
             }
         }
 
-        modelAndView.getModel().put("dividedMovieGenres", dividedMovieGenres);
-
-        List<List<Genre>> dividedMusicGenres = new ArrayList<List<Genre>>();
-        for (int i = 0; i <= musicGenres.size() / 15; i++) {
-            if (musicGenres.size() > (i + 1) * 15) {
-                dividedMusicGenres.add(musicGenres.subList(i * 15, (i + 1) * 15));
-            } else {
-                dividedMusicGenres.add(musicGenres.subList(i * 15, musicGenres.size()));
-            }
-        }
         modelAndView.getModel().put("dividedMusicGenres", dividedMusicGenres);
     }
 
