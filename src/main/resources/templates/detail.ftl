@@ -83,7 +83,7 @@
                         <div class="col-sm-6">
                             <div class="box">
                                 <h1 class="text-center">${item.title?html}</h1>
-                                <p class="goToDescription"><a href="#details" class="scroll-to">Scroll to product details, material & care and sizing</a>
+                                <p class="goToDescription"><a href="#details" class="scroll-to">To Summary</a>
                                 </p>
                                 <p class="price">￥${item.price}</p>
 

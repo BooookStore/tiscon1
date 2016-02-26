@@ -31,13 +31,43 @@ public class LayoutInterceptor extends HandlerInterceptorAdapter {
 
         // メニュー表示用にListを分割
         List<List<Genre>> dividedMovieGenres = new ArrayList<List<Genre>>();
-        for (int i = 0; i <= movieGenres.size() / 15; i++) {
-            if (movieGenres.size() > (i + 1) * 15) {
-                dividedMovieGenres.add(movieGenres.subList(i * 15, (i + 1) * 15));
-            } else {
-                dividedMovieGenres.add(movieGenres.subList(i * 15, movieGenres.size()));
+//        for (int i = 0; i <= movieGenres.size() / 15; i++) {
+//            if (movieGenres.size() > (i + 1) * 15) {
+//                dividedMovieGenres.add(movieGenres.subList(i * 15, (i + 1) * 15));
+//            } else {
+//                dividedMovieGenres.add(movieGenres.subList(i * 15, movieGenres.size()));
+//            }
+//        }
+
+        List<Genre> musicCountry = new ArrayList<>();
+        List<Genre> musicOther = new ArrayList<>();
+        movieGenres.stream().forEach(o -> {
+            if(o.getName().equals("日本映画") ||
+                    o.getName().equals("アフリカ") ||
+                    o.getName().equals("外国") ||
+                    o.getName().equals("韓国映画") ||
+                    o.getName().equals("中東") ||
+                    o.getName().equals("インド地方音楽") ||
+                    o.getName().equals("ロシア"))
+            {
+                musicCountry.add(o);
+            }else{
+                musicOther.add(o);
+            }
+        });
+
+        //国別のカテゴリを設定
+        dividedMovieGenres.add(musicCountry);
+
+        //ジャンル別のカテゴリを設定
+        for (int i = 0 ; i <= musicOther.size() / 15 ; i++){
+            if(musicOther.size() > (i + 1) * 15){
+                dividedMovieGenres.add(musicOther.subList(i * 15, (i +1) * 15));
+            }else{
+                dividedMovieGenres.add(musicOther.subList(i * 15, musicOther.size()));
             }
         }
+
         modelAndView.getModel().put("dividedMovieGenres", dividedMovieGenres);
 
         List<List<Genre>> dividedMusicGenres = new ArrayList<List<Genre>>();
