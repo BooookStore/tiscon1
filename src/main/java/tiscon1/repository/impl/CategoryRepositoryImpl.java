@@ -66,15 +66,27 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         Map<String, Object> top10Map = (Map<String, Object>) mapper.readValue(jsonString, Map.class).get("feed");
         List<Map<String, Object>> top10List = (List<Map<String, Object>>) top10Map.get("entry");
 
+        System.out.println("start new ArryList");
+
         List<Item> top10 = new ArrayList<Item>();
         for (Map<String, Object> map : top10List) {
+
+            System.out.println("start map.get(id)");
+
             Map<String, Map<String, Object>> mapId = (Map<String, Map<String, Object>>) map.get("id");
+
+            System.out.println("start top10.add()");
+
             top10.add(searchItem(genreId, (String) mapId.get("attributes").get("im:id")));
         }
+
+        System.out.println("end new ArryList");
+
         return top10;
     }
 
     public Item searchItem(String genreId, String id) throws IOException {
+
         // プロキシ設定が不要の場合
         RestTemplate rest = new RestTemplate();
         // プロキシ設定が必要の場合

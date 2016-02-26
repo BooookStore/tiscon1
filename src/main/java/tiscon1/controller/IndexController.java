@@ -31,7 +31,6 @@ public class IndexController {
         } catch (Exception e) {
             throw new SystemException();
         }
-
         //Templatesから"index"を探す。
         return "index";
     }

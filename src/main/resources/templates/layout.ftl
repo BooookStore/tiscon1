@@ -58,8 +58,9 @@
                         <ul class="dropdown-menu">
                                 <div class="yamm-content">
                                     <div class="row">
-                                            <div class="col-sm-3">
-                                                <a href="/logout" class="layout-menu-font">Logout</a>
+                                            <div class="col-sm-12">
+                                                <a href="/logout" class="layout-menu-font"><font color="#000000">Logout</font></a>
+                                                <a href="/my/account?id=${customer.id}" class="layout-menu-font"><font color="#000000"> | My account</font></a>
                                             </div>
                                     </div>
                                 </div>
